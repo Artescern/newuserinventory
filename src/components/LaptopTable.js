@@ -13,7 +13,9 @@ const LaptopTable = ({
   editRow,
   deleteRow,
   currentId,
-  setCurrentId
+  setCurrentId,
+  fetchData,
+  setTableRows
 }) => {
 
   const [viewMainMode, setViewMainMode] = useState(false);
@@ -48,6 +50,7 @@ const LaptopTable = ({
           viewMainMode={viewMainMode}
           id={currentId}
           viewMaintenance={viewMaintenance}
+          
         />
       )}
       {viewLoanMode && (
@@ -56,6 +59,7 @@ const LaptopTable = ({
           viewLoanMode={viewLoanMode}
           id={currentId}
           viewLoan={viewLoan}
+          fetchTableData={fetchData}
         />
       )}
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -71,7 +75,7 @@ const LaptopTable = ({
               <th scope="col" className="w-1/12 px-6 py-3">Color</th>
               <th scope="col" className="w-1/12 px-6 py-3">Issued to</th>
               <th scope="col" className="w-1/12 px-6 py-3">Grant</th>
-              <th scope="col" className="w-1/12 px-6 py-3">Charged/Updated</th>
+              <th scope="col" className="w-1/12 px-6 py-3">Charged</th>
               <th scope="col" className="w-1/12 px-6 py-3">Maintenance</th>
               <th scope="col" className="w-1/12 px-6 py-3">Loan</th>
               <th scope="col" className="w-2/12 px-6 py-3">Actions</th>
@@ -98,8 +102,8 @@ const LaptopTable = ({
                   <td className="w-1/12 px-6 py-4">{row.color}</td>
                   <td className="w-1/12 px-6 py-4">{row.issuedTo}</td>
                   <td className="w-1/12 px-6 py-4">{row.grant}</td>
-                  <td className="w-1/12 px-6 py-4">{row.charged}</td>
-                  <td className="w-1/12 px-6 py-4">
+                  <td className="w-1/12 px-6 py-4">{row.chargedUpdated}</td>
+                  <td className="w-1/12 px-4 py-4">
                     <button
                       onClick={() => viewMaintenance(row.id)}
                       className="bg-customOrange hover:bg-[#d6692a] text-white font-semibold py-2 px-4 rounded"

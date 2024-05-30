@@ -4,9 +4,9 @@ import Modal from './Modal';
 
 const AddRowForm = ({ fetchData, setAddRowMode, selectedTable }) => {
   const tableFields = {
-    Computers: ["assetTag", "serialNumber", "status", "brand", "model", "type", "color", "issuedTo", "grant", "charged"],
+    Computers: ["assetTag", "serialNumber", "brand", "model", "type", "color", "grantType", "chargedUpdated"],
     Students: ["badgeName", "studentName", "location", "notes"],
-    Supplies: ["sku", "quantityInStock", "unit", "buildingLocation", "floor", "lockerArea", "reorderLevel", "reorderQuantity", "leadTimeForReorder", "vendor", "estimatedCost"]
+    Supplies: ["sku" , "quantityInStock", "unit", "buildingLocation", "floor", "lockerArea", "reorderLevel", "reoderQuantity", "leadTimeForReorder", "vendor", "estimatedCost" ]
   };
 
   const apiUrl = process.env.REACT_APP_API_URL;
@@ -23,7 +23,7 @@ const AddRowForm = ({ fetchData, setAddRowMode, selectedTable }) => {
 
   const handleCreate = async (e) => {
     e.preventDefault();
-    const newRow = { ...newRowValues };
+    const newRow = { ...newRowValues, status: 'Available', issuedTo: 'N/A', chargedUpdated: newRowValues.chargedUpdated === undefined? 'Yes' : newRowValues.chargedUpdated };
     try {
       let response;
       if (selectedTable === "Computers") {
@@ -59,6 +59,15 @@ const AddRowForm = ({ fetchData, setAddRowMode, selectedTable }) => {
             {fields.map((field, index) => (
               <div key={index} className="col-span-1">
                 <label className="block text-sm font-medium text-gray-700">{field.replace(/([A-Z])/g, ' $1').replace(/^./, function(str){ return str.toUpperCase(); })}</label>
+                {field === "chargedUpdated" ? (
+                        <select  onChange={(e) => handleInputChange(field, e.target.value)}>
+                          <option value="Yes">Yes</option>
+                          <option value="No">No</option>
+                        </select>
+                      ) : 
+                      field ==="notes" ? 
+                      <textarea onChange={(e) => handleInputChange(field, e.target.value)}></textarea> :
+                      (
                 <input
                   type="text"
                   id={field}
@@ -66,7 +75,7 @@ const AddRowForm = ({ fetchData, setAddRowMode, selectedTable }) => {
                   onChange={(e) => handleInputChange(field, e.target.value)}
                   placeholder="Type here"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                />
+                />)}
               </div>
             ))}
           </form>

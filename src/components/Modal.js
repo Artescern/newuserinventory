@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Modal = ({ title, children, onClose, onConfirm }) => {
+const Modal = ({ title, children, onClose, onConfirm, editMode }) => {
   return (
     <div className="fixed top-0 left-0 right-0 z-50 flex items-center justify-center w-full h-full p-4 overflow-x-hidden overflow-y-auto bg-gray-900 bg-opacity-50">
       <div className="relative w-full max-w-2xl bg-white rounded-lg shadow dark:bg-gray-700">
@@ -38,7 +38,7 @@ const Modal = ({ title, children, onClose, onConfirm }) => {
           onClick={onConfirm}
           className="text-white bg-customBlue hover:bg-customBlueLight focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5"
         >
-          Confirm
+          {editMode ? 'Confirm edit' : 'Add' }
         </button>
         </div>
       </div>

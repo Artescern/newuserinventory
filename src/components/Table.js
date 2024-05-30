@@ -144,6 +144,7 @@ const Table = () => {
           setAddRowMode={setAddRowMode}
           addNewRow={addNewRow}
           selectedTable={selectedTable}
+         
         />
       )}
       {selectedTable === "Computers" ? 
