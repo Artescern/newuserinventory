@@ -6,8 +6,11 @@ import { ReactTabulator } from "react-tabulator";
 import axios from "axios";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
 
-ChartJS.register(ArcElement, Tooltip, Legend);
+
+ChartJS.register(ArcElement, Tooltip, Legend, ChartDataLabels);
+
 
 
 
@@ -16,12 +19,12 @@ const Dashboard = () => {
   const [tableRows, setTableRows] = useState([]);
   const [laptopData, setLaptopData] = useState([]);
   const [badgeData, setBadgeData] = useState([]);
-  const [supplyChartData, setSupplyChartData] = useState([]);
+  const [supplyChartData, setSupplyChartData] = useState({ labels: [], datasets: [] });  
   const [suppliesData, setSuppliesData] = useState([]);
   const [view, setView] = useState("computers");
   const [numOfLoans, setNumOfLoans] = useState(0);
   const [numOfBadges, setNumOfBadges] = useState(0);
-
+  const [options, setOptions] = useState({});
   const [pastLoans, setPastLoans] = useState(true);
   const date = new Date();
 
@@ -109,24 +112,48 @@ const Dashboard = () => {
         console.log(newArr);
         setSuppliesData(newArr);
 
-      if (Array.isArray(newArr)){
-        const chartLabels = newArr.map((supply) => supply.sku);
-        const chartData = newArr.map((supply) => supply.cost);
-
-        const data = {
-          labels: chartLabels,
-          datasets: [
-            {
-              label: 'Total Cost',
-              data: chartData,
-              
-              borderWidth: 3,
-            },
-          ],
-        }; 
-        console.log(data)
-        setSupplyChartData(data);
-      }
+        if (Array.isArray(newArr)){
+            const chartLabels = newArr.map((supply) => supply.sku);
+            const chartData = newArr.map((supply) => supply.cost);
+    
+            const data = {
+              labels: chartLabels,
+              datasets: [
+                {
+                  label: 'Total Cost',
+                  data: chartData,
+                  
+                  borderWidth: 3,
+    
+                  backgroundColor: ["#0074D9", "#FF4136", "#2ECC40", "#FF851B", "#7FDBFF", "#B10DC9", "#FFDC00", "#001f3f", "#39CCCC", "#01FF70", "#85144b", "#F012BE", "#3D9970", "#111111", "#AAAAAA"],
+                },
+              ],
+            }; 
+            setSupplyChartData(data); // get data to the donut component
+            console.log(supplyChartData);
+    
+            const chartOptions  = {
+              plugins: {
+             datalabels: {
+                formatter: (value, context) => {
+                  const label = context.chart.data.labels[context.dataIndex];
+                  return `${label}: ${value}`;
+                },
+                  color: "white",
+                  
+                  font: {
+                    weight: 'bold',
+                    size:14,
+                    family: 'Arial',
+                  },
+                },
+                responsive: true,
+              },
+              cutout: data.map((item) => item.cutout),
+            };
+    
+            setOptions(chartOptions);
+          }
         
       }
     } catch (error) {
@@ -166,6 +193,7 @@ const Dashboard = () => {
   ];
 
   const supplyColumns = [
+    { title: "SKU", field: "sku"},
     { title: "Quantity", field: "quantity", width: 150 },
     { title: "Unit", field: "unit", hozAlign: "left" },
     { title: "Building Location", field: "location", hozAlign: "left" },
@@ -265,7 +293,10 @@ const Dashboard = () => {
 
               <ReactTabulator  data={suppliesData} columns={supplyColumns} layout={"fitColumns"} />
 
-              {/* <Doughnut data={supplyChartData} /> */}
+              <div className="chart-container">
+                <Doughnut data={supplyChartData} options={options} />
+              </div>            
+              
             </div>
           )}
         </div>
