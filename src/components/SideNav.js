@@ -7,7 +7,7 @@ export default function SideNav({ userEmail }) {
     const navigate = useNavigate();
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
     const [userInfo, setUserInfo] = useState(null);
-    const [previewImage, setPreviewImage] = useState(null);
+    const [profilePicture, setProfilePicture] = useState(null);
 
     useEffect(() => {
         const storedUserInfo = localStorage.getItem('userInfo');
@@ -27,11 +27,18 @@ export default function SideNav({ userEmail }) {
                 console.error('Error fetching user data:', error);
             }
         };
-    
+
         if (userEmail) {
             fetchUserData();
         }
     }, [userEmail]);
+
+    useEffect(() => {
+        if (userInfo && userInfo.profilePicture) {
+            setProfilePicture(userInfo.profilePicture);
+        }
+    }, [userInfo]);
+
     const handleLogout = async () => {
         try {
             await doSignOut();
@@ -113,8 +120,7 @@ export default function SideNav({ userEmail }) {
                                 viewBox="0 0 20 20"
                                 xmlns="http://www.w3.org/2000/svg"
                             >
-                                <path
-                                    fillRule="evenodd"
+                                <path                                    fillRule="evenodd"
                                     d="M10 12a5 5 0 100-10 5 5 0 000 10zm-7 8a7 7 0 1114 0H3z"
                                     clipRule="evenodd"
                                 />
@@ -126,11 +132,14 @@ export default function SideNav({ userEmail }) {
                 {isSidebarOpen && (
                     <div className="space-y-6 md:space-y-10 mb-10">
                         <div id="profile" className="space-y-3">
-                            <img
-                                src={previewImage || "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Windows_10_Default_Profile_Picture.svg/2048px-Windows_10_DefaultProfile_Picture.svg.png"}
-                                alt="Avatar user"
-                                className="w-21 h-24 md rounded-full mx-auto"
-                            />
+                            {/* Display profile picture */}
+                            {profilePicture && (
+                                <img
+                                    src={`data:${userInfo.profilePictureType};base64,${profilePicture}`}
+                                    alt="Avatar user"
+                                    className="w-21 h-24 md rounded-full mx-auto"
+                                />
+                            )}
                             <div>
                                 <h2 className="font-medium text-xs xl:text-sm text-center text-teal-500">
                                     {userInfo ? `${userInfo.firstName} ${userInfo.lastName}` : "Loading..."}
@@ -154,3 +163,4 @@ export default function SideNav({ userEmail }) {
         </div>
     );
 }
+
