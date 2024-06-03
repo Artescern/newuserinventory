@@ -95,6 +95,14 @@ const Table = () => {
     }
   };
 
+  const updateTableRows = (studentId, notes) => {
+    setTableRows(prevRows => 
+      prevRows.map(row => 
+        row.id === studentId ? { ...row, notes } : row
+      )
+    );
+  };
+
   const editRow = (id) => {
     setSelectedRow(id);
     setEditMode(true);
@@ -163,6 +171,7 @@ const Table = () => {
         selectedTable === "Students" ? 
         <StudentTable
           tableRows={tableRows}
+          updateTableRows={updateTableRows}
           editMode={editMode}
           selectedRow={selectedRow}
           handleInputChange={handleInputChange}
