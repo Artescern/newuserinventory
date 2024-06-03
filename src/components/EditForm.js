@@ -4,7 +4,7 @@ import Modal from './Modal';
 const EditForm = ({ row, handleInputChange, confirmEdit, selectedTable, cancelEdit }) => {
   const tableFields = {
     Laptops: ["assetTag", "serialNumber", "status", "brand", "model", "type", "color", "issuedTo", "grantType", "chargedUpdated"],
-    Students: ["badge", "studentName", "location", "notes"],
+    Students: ["badge", "studentName", "location"],
     Supplies: ["sku", "quantityInStock", "unit", "buildingLocation", "floor", "lockerArea", "reorderLevel", "reorderQuantity", "leadTimeForReorder", "vendor", "estimatedCost"]
   };
 
