@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Modal from './Modal';
 
-const Maintenance = ({ id, viewMaintenance, tableRows }) => {
+const Maintenance = ({ id, viewMaintenance, tableRows, cancelEdit }) => {
   const apiUrl = process.env.REACT_APP_API_URL;
     const [maintenanceRows, setMaintenanceRows] = useState([]);    
     const [descriptionInput, setDescriptionInput] = useState('');

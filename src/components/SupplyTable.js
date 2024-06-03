@@ -11,7 +11,8 @@ const SupplyTable = ({
   editRow,
   deleteRow,
   currentId,
-  setCurrentId
+  setCurrentId,
+  cancelEdit
 }) => {
   const first = "sku";
   const second = "quantityInStock";
@@ -64,6 +65,7 @@ const SupplyTable = ({
                   handleInputChange={handleInputChange}
                   confirmEdit={confirmEdit}
                   selectedTable="Supplies"
+                  cancelEdit={cancelEdit}
                 />
               ) : (
                 <tr key={row.id} className={index % 2 === 0 ? "bg-white border-b dark:bg-gray-800 dark:border-gray-700" : "bg-white dark:bg-gray-800"}>

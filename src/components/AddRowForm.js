@@ -69,7 +69,11 @@ const AddRowForm = ({ fetchData, setAddRowMode, selectedTable }) => {
                       <textarea onChange={(e) => handleInputChange(field, e.target.value)}></textarea> :
                       (
                 <input
-                  type="text"
+                  type={field === "quantityInStock" || 
+                  field === "reorderLevel" || 
+                  field === "reorderQuantity" || 
+                  field ==="leadTimeForReorder" || 
+                  field ==="estimatedCost" ? 'number' : 'text'}
                   id={field}
                   name={field}
                   onChange={(e) => handleInputChange(field, e.target.value)}

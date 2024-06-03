@@ -15,7 +15,8 @@ const LaptopTable = ({
   currentId,
   setCurrentId,
   fetchData,
-  setTableRows
+  setTableRows,
+  cancelEdit
 }) => {
 
   const [viewMainMode, setViewMainMode] = useState(false);
@@ -50,7 +51,6 @@ const LaptopTable = ({
           viewMainMode={viewMainMode}
           id={currentId}
           viewMaintenance={viewMaintenance}
-          
         />
       )}
       {viewLoanMode && (
@@ -90,6 +90,7 @@ const LaptopTable = ({
                   handleInputChange={handleInputChange}
                   confirmEdit={confirmEdit}
                   selectedTable="Laptops"
+                  cancelEdit={cancelEdit}
                 />
               ) : (
                 <tr key={row.id} className={index % 2 === 0 ? "bg-white border-b dark:bg-gray-800 dark:border-gray-700" : "bg-white dark:bg-gray-800"}>

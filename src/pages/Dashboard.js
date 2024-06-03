@@ -3,6 +3,7 @@ import Header from "../components/Header";
 import SideNav from "../components/SideNav";
 import { Line } from "react-chartjs-2";
 import { ReactTabulator } from "react-tabulator";
+import 'react-tabulator/lib/styles.css'
 import axios from "axios";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
@@ -122,9 +123,7 @@ const Dashboard = () => {
                 {
                   label: 'Total Cost',
                   data: chartData,
-                  
                   borderWidth: 3,
-    
                   backgroundColor: ["#0074D9", "#FF4136", "#2ECC40", "#FF851B", "#7FDBFF", "#B10DC9", "#FFDC00", "#001f3f", "#39CCCC", "#01FF70", "#85144b", "#F012BE", "#3D9970", "#111111", "#AAAAAA"],
                 },
               ],
@@ -142,6 +141,7 @@ const Dashboard = () => {
                   color: "white",
                   
                   font: {
+                    
                     weight: 'bold',
                     size:14,
                     family: 'Arial',
@@ -234,16 +234,26 @@ const Dashboard = () => {
   };
 
   let laptopTableRef = useRef(null);
+
+  const columns = [
+    { title: 'Column 1', field: 'col1' },
+    { title: 'Column 2', field: 'col2' },
+    { title: 'Column 3', field: 'col3' },
+    // Add more columns as needed
+  ];
+
+  const data = [
+    { id: 1, col1: 'Data 1', col2: 'Data 2', col3: 'Data 3' },
+    // Add more data rows as needed
+  ];
   return (
-    <div className="dashboard">
-      <Header />
-      <div className="container">
+    <div>
+      <div className="flex mr-10">
         <SideNav />
-        <div className="content">
-          <h1 style={{fontSize: '4rem', marginTop: '50px'}}>DASHBOARD</h1>
-          <div style={{marginTop: '50px'}}>
-          <label style={{fontSize:"1.5rem"}}>View: </label>
-            <select onChange={e => setView(e.target.value)} >
+        <div className="ml-10 mt-[15rem] flex flex-col  items-center w-full ">
+          <div className="">
+          <label >View: </label>
+            <select className="mx-2 px-2 py-1 border border-gray-300 rounded-md"onChange={e => setView(e.target.value)} >
               <option value="computers">Loans</option>
               <option value="badges">Badges</option>
               <option value="supplies">Supplies</option>
@@ -251,20 +261,20 @@ const Dashboard = () => {
           </div>
           {view == "computers" && (
             <> 
-              <div style={{ marginTop: "30px" }}>
-                <div style={{ margin: "45px" }}>
-                  <h1 style={{color: 'var(--code-orange)'}}>{numOfLoans}</h1>
-                  <h2>{pastLoans ? 'Total Loans' : 'Current Loans'}</h2>
+              <div>
+                <div className="mt-5 flex flex-col items-center text-center">
+                  <h1 className="text-customOrange text-4xl mt-5" >{numOfLoans}</h1>
+                  <h2 className="text-xl mt-2">{pastLoans ? 'Total Loans' : 'Current Loans'}</h2>
                 </div>
                 <div>
-                  <div className="loanLink" style={{fontWeight: 'bold', fontSize:'1.4rem', display:'flex', justifyContent:'space-between', padding: '4px 0'}}>
+                  <div className="hover:text-customOrange cursor-pointer  mt-5" >
                     {pastLoans ? <p onClick={() => {setPastLoans(false)}}>Switch to Current Loans</p> :
                         <p onClick={() => {setPastLoans(true)}}>Switch to All Loans</p>
-                    }
-                    
+                    } 
                     <div></div>
                   </div>
-                  <ReactTabulator
+                 
+                    <ReactTabulator
                     onRef={(r) => (laptopTableRef = r)}
                     data={laptopData}
                     columns={laptopColumns.map((col) =>
@@ -275,25 +285,26 @@ const Dashboard = () => {
                     layout={"fitColumns"}
                     rowFormatter={rowFormatter}
                   />
+
+                  
                 </div>
               </div>
             </>
           )}
           {view == "badges" && (
-            <div style={{marginTop: '50px'}}>
-              <div style={{ margin: "45px" }}>
-                  <h1 style={{color: 'var(--code-orange)'}}>{numOfBadges}</h1>
-                  <h2>Current Badges</h2>
+            <div >
+              <div  className="mt-5 mb-5 flex flex-col items-center text-center">
+                  <h1 className="text-customOrange text-4xl mt-5">{numOfBadges}</h1>
+                  <h2 className="text-xl mt-2">Current Badges</h2>
                 </div>
+              
               <ReactTabulator data={badgeData} columns={badgeColumns} layout={"fitColumns"} />
             </div>
           )}
           {view == "supplies" && (
-            <div style={{marginTop: '50px'}}>
-
+            <div className="mt-5">
               <ReactTabulator  data={suppliesData} columns={supplyColumns} layout={"fitColumns"} />
-
-              <div className="chart-container">
+              <div className="w-100 flex justify-center mt-5">
                 <Doughnut data={supplyChartData} options={options} />
               </div>            
               

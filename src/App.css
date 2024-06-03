@@ -2,6 +2,36 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+@import url("tabulator-tables");
 
+.tabulator{
+    width:80vw;
+    font-size: 1.1rem;
+    border:none;
+  }
+  .tabulator .tabulator-header{
+    border: none;
+  }
+  .tabulator-headers{
+    width: 100%;
 
+  
+  }
+  .tabulator-cell {
+  
+    
+  }
 
+  .tabulator-col-content{
+    background-color: rgb(249 250 251);
+    color: rgb(55 65 81);   
+
+  }
+
+  .tabulator-row .tabulator-cell {
+    border: none;
+  }
+
+  .tabulator .tabulator-header .tabulator-col {
+    border: none;
+  }

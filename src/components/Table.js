@@ -62,6 +62,11 @@ const Table = () => {
     setIsEditModalOpen(false);
   };
 
+  const cancelEdit = () => {
+    setIsEditModalOpen(false);
+    setEditMode(false);
+  }
+
   const handleConfirmEdit = () => {
     confirmEdit();
     closeEditModal();
@@ -149,6 +154,7 @@ const Table = () => {
       )}
       {selectedTable === "Computers" ? 
         <LaptopTable
+
           tableRows={tableRows}
           editMode={editMode}
           selectedRow={selectedRow}
@@ -159,6 +165,7 @@ const Table = () => {
           currentId={currentId}
           setCurrentId={setCurrentId}
           fetchData={fetchData}
+          cancelEdit={cancelEdit}
         /> :
         selectedTable === "Students" ? 
         <StudentTable
@@ -171,6 +178,7 @@ const Table = () => {
           deleteRow={deleteRow}
           currentId={currentId}
           setCurrentId={setCurrentId}
+          cancelEdit={cancelEdit}
         /> : 
           <SupplyTable 
             tableRows={tableRows}
@@ -182,6 +190,7 @@ const Table = () => {
             deleteRow={deleteRow}
             currentId={currentId}
             setCurrentId={setCurrentId}
+            cancelEdit={cancelEdit}
           />
       } 
     </div>
