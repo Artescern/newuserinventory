@@ -36,10 +36,10 @@ export default function Login() {
       setError('');
       await doCreateUserWithEmailAndPassword(email, password);
       await axios.post(`${apiUrl}/users`, {
-        firstName,
-        lastName,
-        email,
-        password,
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        password: password,
         role: 'USER'
       });
       setIsRegistering(false); 

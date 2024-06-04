@@ -143,7 +143,7 @@ const Dashboard = () => {
                   font: {
                     
                     weight: 'bold',
-                    size:14,
+                    size:12,
                     family: 'Arial',
                   },
                 },
@@ -303,10 +303,11 @@ const Dashboard = () => {
           )}
           {view == "supplies" && (
             <div className="mt-5">
-              <ReactTabulator  data={suppliesData} columns={supplyColumns} layout={"fitColumns"} />
-              <div className="w-100 flex justify-center mt-5">
+              <div className="w-100 flex justify-center mt-5 mb-5">
                 <Doughnut data={supplyChartData} options={options} />
-              </div>            
+              </div>   
+              <ReactTabulator  data={suppliesData} columns={supplyColumns} layout={"fitColumns"} />
+                       
               
             </div>
           )}

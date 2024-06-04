@@ -2,9 +2,9 @@ import React from 'react';
 
 const InventorySearch = ({ tableRows, setTableRows, selectedTable, savedTableRows }) => {
   const tableFields = {
-    Laptops: ["assetTag", "serialNumber", "status", "brand", "model", "type", "color", "issuedTo", "grant"],
-    Students: ["badgeName", "studentName", "location"],
-    Supplies: [""]
+    Computers: [ "assetTag", "serialNumber", "brand", "model", "type", "color", "issuedTo", "grant"],
+    Students: ["badge", "studentName", "location"],
+    Supplies: ["sku", "unit", "buildingLocation", "floor", "lockerArea", "vendor"]
   };
 
   const handleSearch = (userInput) => {

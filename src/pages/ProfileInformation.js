@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios'; 
 import SideNav from '../components/SideNav';
 
 const ProfileInformation = () => {
+  const navigate = useNavigate();
   const apiUrl = process.env.REACT_APP_API_URL; 
   const [formData, setFormData] = useState({
     firstName: '',
@@ -25,6 +27,7 @@ const ProfileInformation = () => {
         setPreviewImage(reader.result);
       };
       reader.readAsDataURL(files[0]);
+      console.log(files[0]);
     } else {
       setFormData((prevData) => ({
         ...prevData,
@@ -41,9 +44,11 @@ const ProfileInformation = () => {
         formDataToSend.append('firstName', formData.firstName);
         formDataToSend.append('lastName', formData.lastName);
         formDataToSend.append('email', formData.email);
-        formDataToSend.append('profileImage', formData.profileImage);
-
-        const response = await axios.post(`${apiUrl}/update-profile`, formDataToSend);
+        formDataToSend.append('profilePicture', formData.profileImage);
+        for (let [key, value] of formDataToSend.entries()) {
+          console.log(`${key}: ${value}`);
+      }
+        const response = await axios.put(`${apiUrl}/users/8`, formDataToSend);
 
         const uploadedImageUrl = response.data.imageUrl;
 
@@ -60,8 +65,7 @@ const ProfileInformation = () => {
   const handlePasswordReset = async () => {
     try {
       setError(''); 
-      await axios.post(`${apiUrl}/request-password-reset`, { email: formData.email });
-      console.log('Password reset requested successfully');
+      navigate()
     } catch (error) {
       setError('Failed to request password reset. Please try again.');
       console.error('Error requesting password reset:', error);
@@ -141,7 +145,7 @@ const ProfileInformation = () => {
             <div className="mb-6">
             <button
                 type="button"
-                onClick={handlePasswordReset}
+                onClick={() => navigate("/forgot-password")}
                 className="flex w-full justify-center rounded-md bg-customOrange px-3 py-2 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-[#d6692a] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 focus-visible:ring-opacity-75"
             >
                 Request Password Reset

@@ -97,7 +97,7 @@ const StudentTable = ({
                 <td className="w-1/4 px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">{row.badgeName}</td>
                 <td className="w-1/4 px-6 py-4">{row.studentName}</td>
                 <td className="w-1/4 px-6 py-4">{row.location}</td>
-                <td className="w-1/4 px-6 py-4">{row.notes.length} Notes</td>
+                <td className="w-1/4 px-6 py-4"> Notes</td>
                 <td className="w-1/4 px-6 py-4">
                   <button
                     onClick={() => handleViewNotes(row.notes, row.id, row.studentName)}
