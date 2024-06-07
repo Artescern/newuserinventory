@@ -135,15 +135,15 @@ const Maintenance = ({ id, viewMaintenance, tableRows, cancelEdit }) => {
         <tr key={row.id} className="bg-white dark:bg-gray-800">
           <td className="w-1/4 px-6 py-4"><input className="w-5/6" type="text" defaultValue={row.description} onChange={(e) => setEditDescriptionInput(e.target.value)}></input></td>
           <td className="w-1/4 px-6 py-4"><input className="w-5/6"type="date" defaultValue={row.date} onChange={(e) => setEditDateInput(e.target.value)}></input></td>
-          <td className="w-1/4 px-6 py-4"><button className="secondary-button" onClick={() => handleEditSubmit(row.id)}>Confirm</button></td>
+          <td className="w-1/4 px-6 py-4"><button className="text-white bg-customBlue hover:bg-customBlueLight focus:outline-none focus:ring-blue-300 font-medium rounded-md text-sm px-3 py-2" onClick={() => handleEditSubmit(row.id)}>Confirm</button></td>
         </tr>
       ) : (
       <tr key={row.id} className="bg-white dark:bg-gray-800">
         <td className="w-1/4 px-6 py-4">{row.description}</td>
         <td className="w-1/4 px-6 py-4">{row.date}</td>
         <td className="w-1/4 px-6 py-4">
-          <button className="secondary-button" onClick={() => handleEdit(row.id)}>Edit</button>
-          <button className="secondary-button" onClick={() => handleDelete(row.id)}>Delete</button>
+          <button className="ml-[-1rem] text-white bg-customBlue hover:bg-customBlueLight  focus:outline-none focus:ring-blue-300 font-medium rounded-md text-sm px-3 py-2" onClick={() => handleEdit(row.id)}>Edit</button>
+          <button className="ml-1 bg-red-500 hover:bg-red-700 text-white font-semibold py-2 px-2 rounded" onClick={() => handleDelete(row.id)}>Delete</button>
         </td>
       </tr>
       )

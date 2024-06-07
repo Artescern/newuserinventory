@@ -102,7 +102,7 @@ const LaptopTable = ({
                   <td className="w-1/12 px-6 py-4">{row.type}</td>
                   <td className="w-1/12 px-6 py-4">{row.color}</td>
                   <td className="w-1/12 px-6 py-4">{row.issuedTo}</td>
-                  <td className="w-1/12 px-6 py-4">{row.grant}</td>
+                  <td className="w-1/12 px-6 py-4">{row.grantType}</td>
                   <td className="w-1/12 px-6 py-4">{row.chargedUpdated}</td>
                   <td className="w-1/12 px-4 py-4">
                     <button

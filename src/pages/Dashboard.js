@@ -268,8 +268,8 @@ const Dashboard = () => {
                 </div>
                 <div>
                   <div className="hover:text-customOrange cursor-pointer  mt-5" >
-                    {pastLoans ? <p onClick={() => {setPastLoans(false)}}>Switch to Current Loans</p> :
-                        <p onClick={() => {setPastLoans(true)}}>Switch to All Loans</p>
+                    {pastLoans ? <button className= "bg-customOrange hover:bg-[#d6692a] text-white font-semibold py-2 px-4 rounded mb-3"onClick={() => {setPastLoans(false)}}>Switch to Current Loans</button> :
+                        <button className="bg-customOrange hover:bg-[#d6692a] text-white font-semibold py-2 px-4 rounded mb-3"onClick={() => {setPastLoans(true)}}>Switch to All Loans</button>
                     } 
                     <div></div>
                   </div>
@@ -285,8 +285,6 @@ const Dashboard = () => {
                     layout={"fitColumns"}
                     rowFormatter={rowFormatter}
                   />
-
-                  
                 </div>
               </div>
             </>

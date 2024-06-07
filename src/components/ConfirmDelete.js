@@ -13,9 +13,10 @@ const ConfirmDelete = ({ setDeleteYes, setConfirmDelete }) => {
       title="Confirm Deletion"
       onClose={() => setConfirmDelete(false)} 
       onConfirm={confirmDelete} 
+      editMode={true}
     >
       <div>
-        <h1 className="text-center my-4">Are you sure you want to delete?</h1>
+        <h1 className="text-center my-4 text-xl font-bold">Are you sure you want to delete?</h1>
 
       </div>
     </Modal>

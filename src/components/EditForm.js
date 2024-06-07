@@ -1,9 +1,9 @@
 import React from 'react';
 import Modal from './Modal';
 
-const EditForm = ({ row, handleInputChange, confirmEdit, selectedTable, cancelEdit }) => {
+const EditForm = ({ row, handleInputChange, confirmEdit, selectedTable, cancelEdit, editMode }) => {
   const tableFields = {
-    Laptops: ["assetTag", "serialNumber", "status", "brand", "model", "type", "color", "issuedTo", "grantType", "chargedUpdated"],
+    Laptops: ["assetTag", "serialNumber", "brand", "model", "type", "color", "grantType", "chargedUpdated"],
     Students: ["badge", "studentName", "location"],
     Supplies: ["sku", "quantityInStock", "unit", "buildingLocation", "floor", "lockerArea", "reorderLevel", "reorderQuantity", "leadTimeForReorder", "vendor", "estimatedCost"]
   };
@@ -16,6 +16,7 @@ const EditForm = ({ row, handleInputChange, confirmEdit, selectedTable, cancelEd
       title="Edit Row"
       onClose={cancelEdit}
       onConfirm={confirmEdit}
+      editMode={true}
     >
       <form className="grid grid-cols-2 gap-4">
         {fields.map((field, index) => (

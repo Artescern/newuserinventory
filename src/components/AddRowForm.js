@@ -6,7 +6,7 @@ const AddRowForm = ({ fetchData, setAddRowMode, selectedTable }) => {
   const tableFields = {
     Computers: ["assetTag", "serialNumber", "brand", "model", "type", "color", "grantType", "chargedUpdated"],
     Students: ["badgeName", "studentName", "location"],
-    Supplies: ["sku" , "quantityInStock", "unit", "buildingLocation", "floor", "lockerArea", "reorderLevel", "reoderQuantity", "leadTimeForReorder", "vendor", "estimatedCost" ]
+    Supplies: ["sku" , "quantityInStock", "unit", "buildingLocation", "floor", "lockerArea", "reorderLevel", "reorderQuantity", "leadTimeForReorder", "vendor", "estimatedCost" ]
   };
 
   const apiUrl = process.env.REACT_APP_API_URL;
