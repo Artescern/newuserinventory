@@ -6,7 +6,6 @@ const InventorySearch = ({ tableRows, setTableRows, selectedTable, savedTableRow
     Students: ["badge", "studentName", "location"],
     Supplies: ["sku", "unit", "buildingLocation", "floor", "lockerArea", "vendor"]
   };
-
   const handleSearch = (userInput) => {
     if (!userInput.trim()) {
       setTableRows(savedTableRows);
@@ -21,7 +20,8 @@ const InventorySearch = ({ tableRows, setTableRows, selectedTable, savedTableRow
       setTableRows(filteredOptions);
     }
   };
-
+  
+  
   return (
     <div className="relative mb-4">
       <label htmlFor="table-search" className="sr-only">Search</label>
@@ -34,7 +34,7 @@ const InventorySearch = ({ tableRows, setTableRows, selectedTable, savedTableRow
         type="text"
         id="table-search-users"
         className="block w-80 pl-10 pr-4 py-2 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-        placeholder="Search for users"
+        placeholder={"Search for " + selectedTable.toLowerCase()}
         onChange={(e) => handleSearch(e.target.value)}
       />
     </div>
